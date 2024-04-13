@@ -39,6 +39,9 @@ int stringToChange(std::string change) {
 int main() {
 	// Format ["$12.30"]
 	std::string change;
+	
+	std::cout << "(Format: $12.30)" << std::endl;
+	std::cout << "Please input the cash amount: ";
 	std::cin >> change;
 
 	int changeAsInt = stringToChange(change);
@@ -66,8 +69,8 @@ int main() {
 		}
 	}
 
-	// This is currently here for testing
-	std::cout << quarters << " | " << dimes << " | " << nickles << " | " << pennies << std::endl;
+	//std::cout << "Cash: " << change << std::endl;
+	std::cout << "Quarters: " << quarters << ", Dimes: " << dimes << ", Nickles: " << nickles << ", Pennies: " << pennies << std::endl;
 
 
 	return 0;
