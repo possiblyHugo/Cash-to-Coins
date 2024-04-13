@@ -1,9 +1,46 @@
-#include <iostream>
 #include <string>
+#include <iostream>
+#include <cctype>
+
+bool stringIsNumber(std::string stringToCheck) {
+	for (int i = 0; i < stringToCheck.length(); i++) {
+		if (!isdigit(stringToCheck[i])) {
+			return false;
+		}
+	}
+	return true;
+}
+
+int stringToChange(std::string change) {
+	int result = 0;
+
+	// Search for "$" and "." and removes them
+	std::size_t found = change.find("$");
+
+	if (found != std::string::npos) {
+		change.erase(found);
+	}
+
+	found = change.find(".");
+	if (found != std::string::npos) {
+		change.erase(found);
+	}
+
+	bool isNumber = stringIsNumber(change);
+
+	if (!isNumber) {
+		std::cout << "There was an error converting the string to a number" << std::endl;
+		exit(1);
+	}
+
+	return result;
+}
 
 int main() {
+	
+	// Format ["$12.30"]
 	std::string change;
-	//std::cin >> change;
+	std::cin >> change;
 
 	int intChange = 1623;
 
@@ -30,6 +67,7 @@ int main() {
 		}
 	}
 
+	// This is currently here for testing
 	std::cout << quarters << " | " << dimes << " | " << nickles << " | " << pennies << std::endl;
 
 
