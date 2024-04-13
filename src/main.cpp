@@ -18,12 +18,12 @@ int stringToChange(std::string change) {
 	std::size_t found = change.find("$");
 
 	if (found != std::string::npos) {
-		change.erase(found);
+		change.erase(change.begin() + found);
 	}
 
 	found = change.find(".");
 	if (found != std::string::npos) {
-		change.erase(found);
+		change.erase(change.begin() + found);
 	}
 
 	bool isNumber = stringIsNumber(change);
@@ -33,37 +33,36 @@ int stringToChange(std::string change) {
 		exit(1);
 	}
 
-	return result;
+	return stoi(change);
 }
 
 int main() {
-	
 	// Format ["$12.30"]
 	std::string change;
 	std::cin >> change;
 
-	int intChange = 1623;
+	int changeAsInt = stringToChange(change);
 
 	int quarters, dimes, nickles, pennies;
 	quarters = dimes = nickles = pennies = 0;
 
-	while (intChange > 0) {
-		if (intChange >= 100) {
-			int tempVal = intChange / 100;
+	while (changeAsInt > 0) {
+		if (changeAsInt >= 100) {
+			int tempVal = changeAsInt / 100;
 			quarters = tempVal * 4;
-			intChange -= tempVal * 100;
+			changeAsInt -= tempVal * 100;
 		}
-		else if (intChange >= 10) {
-			dimes = intChange / 10;
-			intChange -= dimes * 10;
+		else if (changeAsInt >= 10) {
+			dimes = changeAsInt / 10;
+			changeAsInt -= dimes * 10;
 		}
-		else if (intChange >= 5) {
-			nickles = intChange / 5;
-			intChange -= nickles * 5;
+		else if (changeAsInt >= 5) {
+			nickles = changeAsInt / 5;
+			changeAsInt -= nickles * 5;
 		}
-		else if (intChange >= 1) {
-			pennies = intChange;
-			intChange -= intChange;
+		else if (changeAsInt >= 1) {
+			pennies = changeAsInt;
+			changeAsInt -= changeAsInt;
 		}
 	}
 
